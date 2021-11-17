@@ -50,45 +50,50 @@ const buttonEl = document.querySelector(".button-color"),
     "E",
     "F",
   ];
+backgroundColorEl.style.color = "#dddddd";
+// Color starting as white,simple mode not selected
 let randColor = "#ffffff",
   simpleSelected = 0;
-backgroundColorEl.innerHTML = `Background color is : ${randColor}`;
+backgroundColorEl.innerHTML = `Color is : ${randColor}`;
 
+// Simple mode button clicked
 buttonSimpleEl.addEventListener("click", function () {
   if (randColor === "#ffffff") {
     randColor = "White";
-    backgroundColorEl.innerHTML = `Background color is : ${randColor}`;
+    backgroundColorEl.innerHTML = `Color is : ${randColor}`;
   }
-
+  // Simple mode active
   simpleSelected = 1;
 });
+// Hex mode button is clicked
 buttonHexEl.addEventListener("click", function () {
   if (randColor === "White") {
     randColor = "#ffffff";
     backgroundColorEl.innerHTML = `Color is : ${randColor}`;
   }
+  // Hex mode is active
   simpleSelected = 0;
 });
+// Change color button clicked
 buttonEl.addEventListener("click", function () {
+  // if hex mode is active, then create a hex value
   if (!simpleSelected) {
     randColor = "#";
     for (let i = 0; i < 6; i++) {
-      // To check what is this about
-      // let testRandom = Math.random();
-      // console.log(testRandom);
-      // console.log(randHexElements.length);
-      // console.log(testRandom * (Number(randHexElements.length) + 1));
-      // console.log(Math.trunc(testRandom * (Number(randHexElements.length) + 1)));
-      // console.log("-----------------------------------------------------");
-
       randColor +=
         randHexElements[
           Math.trunc(Math.random() * Number(randHexElements.length))
         ];
     }
-  } else randColor = randSimpleElements[Math.trunc(Math.random() * Number(randSimpleElements.length))];
-  backgroundColorEl.style.color = randColor === "Black" ? "white" : "black";
-  console.log(randColor);
+  }
+  // if simple mode active then select one from color library
+  else
+    randColor =
+      randSimpleElements[
+        Math.trunc(Math.random() * Number(randSimpleElements.length))
+      ];
+  // Change color of the hexagon
   bodyEl.style.background = randColor;
-  backgroundColorEl.innerHTML = `Background color is : ${randColor}`;
+  // Write the value to the screen
+  backgroundColorEl.innerHTML = `Color is : ${randColor}`;
 });
